@@ -3,8 +3,6 @@ namespace Deal
 {
     public class MyClass
     {
-        public MyClass()
-        {
-        }
+           
     }
 }

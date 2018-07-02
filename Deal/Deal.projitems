@@ -9,6 +9,7 @@
     <Import_RootNamespace>Deal</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Deal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DealCollection.cs" />
   </ItemGroup>
 </Project>
