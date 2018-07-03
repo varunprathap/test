@@ -10,7 +10,7 @@ namespace Deal
             new Deal{mPhotoID=1003,mCaption="Deals..",mPercentage=10},
             new Deal{mPhotoID=1004,mCaption="Deals..",mPercentage=40},
             new Deal{mPhotoID=1005,mCaption="Deals..",mPercentage=30},
-            new Deal{mPhotoID=1006,mCaption="Deals..",mPercentage=10}
+            new Deal{mPhotoID=1006,mCaption="Deals..",mPercentage=30}
 
         };
     }
