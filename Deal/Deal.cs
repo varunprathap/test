@@ -12,6 +12,11 @@ namespace Deal
         //Offer percentage for this deal:
         public int mPercentage;
 
+        //Description for this deal:
+        public string mDesc;
+
+        //Image for this deal:
+        public string mImageUrl;
 
         // Return the ID of the deal:
         public int PhotoID
@@ -26,9 +31,22 @@ namespace Deal
         }
 
         // Return the percentage of the deal:
-        public string Caption
+        public int Percentage
         {
-            get { return mCaption; }
+            get { return mPercentage; }
+        }
+
+
+        // Return the description of the deal:
+        public string Description
+        {
+            get { return mDesc; }
+        }
+
+        // Return the description of the deal:
+        public string ImageUrl
+        {
+            get { return mImageUrl; }
         }
     }
 }
