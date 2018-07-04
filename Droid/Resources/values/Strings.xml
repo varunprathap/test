@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, Click Me!</string>
     <string name="app_name">Deal.Droid</string>
+  <string name="info_button_description">Show photo information</string>
+  <string name="star_button_description">Fave this photo</string>
+  <string name="photo_description">Photo</string>
 </resources>

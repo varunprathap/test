@@ -6,19 +6,26 @@ using Deal.Droid.Adapter;
 using Deal.Droid;
 using Android.Graphics;
 using Android.Content.Res;
+using Android.Content;
+using Android.Widget;
 
 public class DealAdapter : RecyclerView.Adapter
 {
-    // Event handler for item clicks:
-    public event EventHandler<int> ItemClick;
+
+    private static IDealItemClickListener mDealItemClickListener;
+
 
     // Underlying data set
     public DealCollection mDealCollection;
 
+
+  
+
     // Load the adapter with the data set
-    public DealAdapter(DealCollection dealCollection)
+    public DealAdapter(DealCollection dealCollection, IDealItemClickListener dealItemClickListener)
     {
         mDealCollection = dealCollection;
+        mDealItemClickListener = dealItemClickListener;
     }
 
 
@@ -36,6 +43,9 @@ public class DealAdapter : RecyclerView.Adapter
         var myImage = BitmapFactory.DecodeResource(res, id);
         vh.Image.SetImageBitmap(myImage);
         vh.Caption.Text = mDealCollection.mDeals[position].Caption;
+        vh.Image.TransitionName = mDealCollection.mDeals[position].ImageUrl;
+
+
     }
 
     // Return the number of photos available in the photo album:
@@ -45,9 +55,9 @@ public class DealAdapter : RecyclerView.Adapter
     }
 
     // Raise an event when the item-click takes place:
-    void OnClick(int position)
+    void OnClick(int position,Deal.Deal deal,ImageView view)
     {
-        ItemClick?.Invoke(this, position);
+        mDealItemClickListener.OnDealItemClick(position, mDealCollection.mDeals[position], view);
     }
 
     public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

@@ -1,16 +1,23 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
+using Android.Views;
+using Android.Widget;
 using com.refractored.fab;
 
 namespace Deal.Droid
 {
     [Activity(Label = "Deal", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : Activity, IDealItemClickListener
     {
-        // RecyclerView instance that displays the deal
-        RecyclerView mRecyclerView;
+
+        public static string EXTRA_DEAL = "deal";
+        public static string EXTRA_IMAGE_NAME = "image_name";
+
+       // RecyclerView instance that displays the deal
+       RecyclerView mRecyclerView;
 
         // Layout manager that lays out each card in the RecyclerView:
         RecyclerView.LayoutManager mLayoutManager;
@@ -20,6 +27,17 @@ namespace Deal.Droid
 
         // Photo album that is managed by the adapter:
         DealCollection mDeals;
+
+     
+
+        public void OnDealItemClick(int pos, Deal deal, ImageView imageView)
+        {
+            Intent intent = new Intent(this, typeof(DetailDeal));
+            intent.PutExtra(EXTRA_DEAL, deal.ImageUrl);
+            intent.PutExtra(EXTRA_IMAGE_NAME, imageView.TransitionName);
+            ActivityOptions options = ActivityOptions.MakeSceneTransitionAnimation(this, imageView, imageView.TransitionName);
+            StartActivity(intent, options.ToBundle());
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,8 +52,7 @@ namespace Deal.Droid
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
 
 
-            var fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.AttachToRecyclerView(mRecyclerView);
+      
 
 
 
@@ -49,14 +66,27 @@ namespace Deal.Droid
 
             // Create an adapter for the RecyclerView, and pass it the
             // data set (the photo album) to manage:
-            mAdapter = new DealAdapter(mDeals);
+            mAdapter = new DealAdapter(mDeals,this);
 
           
             // Plug the adapter into the RecyclerView:
             mRecyclerView.SetAdapter(mAdapter);
 
+           
+
+
         }
 
+
+        void OnItemClick(object sender, int position)
+        {
+            // Display a toast that briefly shows the enumeration of the selected photo:
+            int photoNum = position + 1;
+            //Toast.MakeText(this, "This is photo number " + photoNum, ToastLength.Short).Show();
+
+
+        }
+         
     }
 
 

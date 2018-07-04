@@ -19,7 +19,7 @@ namespace Deal.Droid.Adapter
         public TextView Caption { get; private set; }
 
         // Get references to the views defined in the CardView layout.
-        public DealAdapterViewHolder(View itemView, Action<int> listener)
+        public DealAdapterViewHolder(View itemView, Action<int,Deal,ImageView> listener)
             : base(itemView)
         {
             // Locate and cache view references:
@@ -27,7 +27,7 @@ namespace Deal.Droid.Adapter
             Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
             // Detect user clicks on the item view and report which item
             // was clicked (by layout position) to the listener:
-            itemView.Click += (sender, e) => listener(base.LayoutPosition);
+            itemView.Click += (sender, e) => listener(base.LayoutPosition,null,Image);
         }
     }
 }
