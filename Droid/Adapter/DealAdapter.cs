@@ -8,6 +8,7 @@ using Android.Graphics;
 using Android.Content.Res;
 using Android.Content;
 using Android.Widget;
+using Deal.ViewModel;
 
 public class DealAdapter : RecyclerView.Adapter
 {
@@ -15,8 +16,8 @@ public class DealAdapter : RecyclerView.Adapter
     private static IDealItemClickListener mDealItemClickListener;
 
 
-    // Underlying data set
-    public DealCollection mDealCollection;
+    //// Underlying data set
+    //public DealCollection mDealCollection;
 
 
   
@@ -24,7 +25,7 @@ public class DealAdapter : RecyclerView.Adapter
     // Load the adapter with the data set
     public DealAdapter(DealCollection dealCollection, IDealItemClickListener dealItemClickListener)
     {
-        mDealCollection = dealCollection;
+        //mDealCollection = dealCollection;
         mDealItemClickListener = dealItemClickListener;
     }
 
@@ -38,12 +39,12 @@ public class DealAdapter : RecyclerView.Adapter
         Resources res = Android.App.Application.Context.Resources;
         // Set the ImageView and TextView in this ViewHolder's CardView 
         // from this position in the photo album:
-        int id = (int)typeof(Resource.Drawable).GetField(mDealCollection.mDeals[position].ImageUrl).GetValue(null);
+        int id = (int)typeof(Resource.Drawable).GetField(ViewModelLocator.dealViewModel.Deals[position].ImageUrl).GetValue(null);
         // Converting Drawable Resource to Bitmap
         var myImage = BitmapFactory.DecodeResource(res, id);
         vh.Image.SetImageBitmap(myImage);
-        vh.Caption.Text = mDealCollection.mDeals[position].Caption;
-        vh.Image.TransitionName = mDealCollection.mDeals[position].ImageUrl;
+        vh.Caption.Text = ViewModelLocator.dealViewModel.Deals[position].Caption;
+        vh.Image.TransitionName = ViewModelLocator.dealViewModel.Deals[position].ImageUrl;
 
 
     }
@@ -51,13 +52,17 @@ public class DealAdapter : RecyclerView.Adapter
     // Return the number of photos available in the photo album:
     public override int ItemCount
     {
-        get { return mDealCollection.DealsCount; }
+        get { return ViewModelLocator.dealViewModel.Deals.Count; }
     }
 
     // Raise an event when the item-click takes place:
-    void OnClick(int position,Deal.Deal deal,ImageView view)
+    void OnClick(int position,ImageView view)
     {
-        mDealItemClickListener.OnDealItemClick(position, mDealCollection.mDeals[position], view);
+        var item = new DetailItem();
+        item.mDeal = ViewModelLocator.dealViewModel.Deals[position];
+        item.mImage = view;
+        ViewModelLocator.dealViewModel.NavigateCommand.Execute(item);
+       // mDealItemClickListener.OnDealItemClick(position, mDealCollection.mDeals[position], view);
     }
 
     public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

@@ -1,17 +1,28 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Support.V7.Widget;
-using Android.Views;
 using Android.Widget;
-using com.refractored.fab;
+using GalaSoft.MvvmLight.Views;
+using Deal.ViewModel;
+using Deal.Droid.App;
+using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace Deal.Droid
 {
     [Activity(Label = "Deal", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : Activity, IDealItemClickListener
+    public class MainActivity : ActivityBase, IDealItemClickListener
     {
+
+        private DealViewModel dealViewModel
+        {
+            get
+            {
+                return App.App.Locator.Main;
+
+            }
+        }
 
         public static string EXTRA_DEAL = "deal";
         public static string EXTRA_IMAGE_NAME = "image_name";
@@ -72,8 +83,11 @@ namespace Deal.Droid
             // Plug the adapter into the RecyclerView:
             mRecyclerView.SetAdapter(mAdapter);
 
-           
 
+            DispatcherHelper.Initialize();
+            var nav = new NavigationService();
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
+            nav.Configure(ViewModelLocator.DetailPageKey, typeof(DetailDeal));
 
         }
 

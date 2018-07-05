@@ -11,5 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Deal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DealCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\DetailItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\DealViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
 </Project>

@@ -15,11 +15,12 @@
         android:layout_height="wrap_content">
       <ImageView
           android:id="@+id/photo"
+          android:tint="@color/photo_tint"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:scaleType="centerCrop"
           android:contentDescription="@string/photo_description" />
-      <ImageButton
+      <!--<ImageButton
           android:id="@+id/info"
           android:layout_width="@dimen/floating_button_size"
           android:layout_height="@dimen/floating_button_size"
@@ -32,29 +33,23 @@
           android:elevation="@dimen/button_elevation"
           android:stateListAnimator="@anim/button_raise"
           android:onClick="showInformation"
-          android:contentDescription="@string/info_button_description" />
+          android:contentDescription="@string/info_button_description" />-->
       <ImageButton
           android:id="@+id/star"
           android:layout_width="@dimen/floating_button_size"
           android:layout_height="@dimen/floating_button_size"
-          android:layout_gravity="bottom|start"
+          android:layout_gravity="bottom|end"
           android:layout_marginStart="16dp"
           android:layout_marginBottom="16dp"
           android:alpha="0.0"
           android:background="@drawable/info_background"
-          android:src="@drawable/ic_star"
+          android:src="@drawable/ic_favorite_border"
+          android:scaleType="centerInside"
           android:elevation="4dp"
           android:stateListAnimator="@anim/button_raise"
-          android:onClick="showStar"
+          android:onClick="ShowStar"
           android:contentDescription="@string/star_button_description" />
-      <FrameLayout
-          android:id="@+id/information_container"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:visibility="invisible">
-       
-      </FrameLayout>
-     
+   
     </FrameLayout>
     <TextView
         android:id="@+id/title"
@@ -62,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:textSize="40sp"
+       android:text="40swwwwwwwwwwwwwwwwwwwwwwp"
         android:fontFamily="sans-serif-light" />
     <TextView
         android:id="@+id/description"
